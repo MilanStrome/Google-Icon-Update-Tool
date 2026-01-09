@@ -737,10 +737,11 @@ st.markdown(
 )
 st.markdown(
     "<div class='small-note'>"
-    "   - by Ex-Code Warrior Ⓜ"
+    "\t- by Ex-Code Warrior Ⓜ"
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
