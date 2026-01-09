@@ -368,10 +368,6 @@ APP_CATEGORIES = {
         "url": "https://play.google.com/store/apps/details?id=com.rvappstudios.flashlight"
     },
     {
-        "name": "Kids App Lock: Parental Lock",
-        "url": "https://play.google.com/store/apps/details?id=com.rvappstudios.child.lock.kids.parental.control.free"
-    },
-    {
         "name": "Magnifying Glass + Flashlight",
         "url": "https://play.google.com/store/apps/details?id=com.rvappstudios.magnifyingglass"
     },
@@ -731,9 +727,9 @@ if analyze:
 # Footer
 # ------------------------------------------------------------
 st.write("")
-# st.markdown(
-#     "<div class='small-note'>"
-#     "Note: Google Play may block scraping sometimes. If an app fails to load, try again later or use paste mode with fewer links."
-#     "</div>",
-#     unsafe_allow_html=True
-# )
+st.markdown(
+    "<div class='small-note'>"
+    "Note: Built like a weapon. Used like a tool. Trusted like a shield. - MK"
+    "</div>",
+    unsafe_allow_html=True
+)
