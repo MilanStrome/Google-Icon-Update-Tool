@@ -652,7 +652,7 @@ if analyze:
                 results.append({"url": url, "error": str(e)})
 
     st.subheader("Results")
-    st.caption("Click app name to open the Play Store listing.")
+    # st.caption("Click app name to open the Play Store listing.")
 
     # Grid display
     rows = [results[i:i + grid_columns] for i in range(0, len(results), grid_columns)]
@@ -734,6 +734,3 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
-
-
-
