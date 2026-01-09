@@ -730,8 +730,9 @@ if analyze:
 st.write("")
 st.markdown(
     "<div class='small-note'>"
-    "'Built like a weapon, used like a tool.' - by MB"
+    "✶ Built like a weapon, use like a tool. - by MB"
     "</div>",
     unsafe_allow_html=True
 )
+
 
