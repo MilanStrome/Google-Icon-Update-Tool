@@ -87,8 +87,9 @@ st.markdown("""
         vertical-align: middle;
     }
     .small-note {
-        font-size: 12px;
-        color: #6b7280;
+        font-size: 15px;
+        font-weight: 800;
+        color: #00008B;
     }
     div.stButton > button {
         background-color: #2563eb !important;  /* Blue */
@@ -729,7 +730,7 @@ if analyze:
 st.write("")
 st.markdown(
     "<div class='small-note'>"
-    "Note: Built like a weapon. Used like a tool. Trusted like a shield. - MK"
+    "'Built like a weapon, used like a tool. - MK'"
     "</div>",
     unsafe_allow_html=True
 )
