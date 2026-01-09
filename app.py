@@ -728,12 +728,21 @@ if analyze:
 # Footer
 # ------------------------------------------------------------
 st.write("")
+st.markdown("</div>", unsafe_allow_html=True)
 st.markdown(
     "<div class='small-note'>"
     "✶ Built like a weapon, use like a tool. ✶ \n- by Ex-Code Warrior Ⓜ"
     "</div>",
     unsafe_allow_html=True
 )
+st.markdown(
+    "<div class='small-note'>"
+    "- by Ex-Code Warrior Ⓜ"
+    "</div>",
+    unsafe_allow_html=True
+)
+
+
 
 
 
