@@ -576,7 +576,7 @@ else:
     st.write("Paste multiple Play Store URLs (one per line).")
     urls_text = st.text_area(
         "Play Store links",
-        placeholder="https://play.google.com/store/apps/details?id=com.whatsapp\nhttps://play.google.com/store/apps/details?id=com.facebook.katana",
+        placeholder="https://play.google.com/store/apps/details?id=com.whatsapp\nhttps://play.google.com/store/apps/details?id=com.moonactive.coinmaster",
         height=160
     )
     selected_urls = parse_urls_from_text(urls_text)
@@ -734,5 +734,6 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
