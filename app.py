@@ -514,10 +514,50 @@ def parse_urls_from_text(text: str):
 # ------------------------------------------------------------
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
-mode = st.selectbox(
-    "Select category:",
-    ["Kids Games", "Applications", "General Games", "Paste PlayStore URL"]
-)
+st.write("Select category:")
+
+# Initialize state
+if "selected_category" not in st.session_state:
+    st.session_state.selected_category = "Kids Games"
+
+def set_category(cat):
+    st.session_state.selected_category = cat
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.checkbox(
+        "Kids Games",
+        value=(st.session_state.selected_category == "Kids Games"),
+        on_change=set_category,
+        args=("Kids Games",)
+    )
+
+with col2:
+    st.checkbox(
+        "Applications",
+        value=(st.session_state.selected_category == "Applications"),
+        on_change=set_category,
+        args=("Applications",)
+    )
+
+with col3:
+    st.checkbox(
+        "General Games",
+        value=(st.session_state.selected_category == "General Games"),
+        on_change=set_category,
+        args=("General Games",)
+    )
+
+with col4:
+    st.checkbox(
+        "Paste PlayStore URL",
+        value=(st.session_state.selected_category == "Paste PlayStore URL"),
+        on_change=set_category,
+        args=("Paste PlayStore URL",)
+    )
+
+mode = st.session_state.selected_category
 
 selected_urls = []
 
@@ -546,7 +586,6 @@ else:
     st.caption("Only Play Store links will be used (one URL per line recommended).")
 
 st.markdown("</div>", unsafe_allow_html=True)
-
 # ------------------------------------------------------------
 # Settings
 # ------------------------------------------------------------
