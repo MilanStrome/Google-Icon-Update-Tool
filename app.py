@@ -735,6 +735,16 @@ def find_localized_icon_differences(base_url: str, base_icon: Image.Image, app_n
             if localized_hash != base_hash:
                 diff_score = image_diff_score(base_icon, localized_icon)
 
+                localized_icon_resized = localized_icon.resize((preview_size, preview_size), Image.LANCZOS)
+                localized_mask_20 = rounded_rect_mask(preview_size, 0.20)
+                localized_mask_30 = rounded_rect_mask(preview_size, 0.30)
+                localized_icon_30 = apply_mask(localized_icon_resized, localized_mask_30)
+                localized_overlay, _ = generate_cut_zone_overlay(
+                    localized_icon_resized,
+                    localized_mask_20,
+                    localized_mask_30
+                )
+
                 diffs.append(
                     {
                         "label": locale["label"],
@@ -745,6 +755,8 @@ def find_localized_icon_differences(base_url: str, base_icon: Image.Image, app_n
                         "app_name": clean_app_title(localized_title or ""),
                         "icon_url": localized_icon_url,
                         "icon": localized_icon,
+                        "icon_30": localized_icon_30,
+                        "overlay": localized_overlay,
                         "diff_score": diff_score,
                     }
                 )
@@ -1019,19 +1031,39 @@ if analyze:
                         st.markdown("".join(chips), unsafe_allow_html=True)
 
                         with st.expander("Show different localized icons", expanded=False):
-                            preview_cols = st.columns(3)
+                            for loc in r["localized_differences"]:
+                                st.markdown(f"**{loc['label']}**")
+                                lc1, lc2, lc3 = st.columns(3)
 
-                            for i, loc in enumerate(r["localized_differences"]):
-                                with preview_cols[i % 3]:
+                                with lc1:
                                     localized_preview = loc["icon"].resize(
                                         (localized_preview_size, localized_preview_size),
                                         Image.LANCZOS
                                     )
-                                    st.image(localized_preview, caption=loc["label"], use_container_width=False)
-                                    # st.caption(f"Language code: {loc['code']}")
-                                    # st.caption(f"hl={loc['hl']} | gl={loc['gl']}")
-                                    # st.caption(f"Difference score: {loc['diff_score']:.2f}")
-                                    st.markdown(f"[Open listing]({loc['url']})")
+                                    st.caption("Original")
+                                    st.image(localized_preview, use_container_width=False)
+
+                                with lc2:
+                                    localized_30_preview = loc["icon_30"].resize(
+                                        (localized_preview_size, localized_preview_size),
+                                        Image.LANCZOS
+                                    )
+                                    st.caption("30%")
+                                    st.image(localized_30_preview, use_container_width=False)
+
+                                with lc3:
+                                    localized_overlay_preview = loc["overlay"].resize(
+                                        (localized_preview_size, localized_preview_size),
+                                        Image.LANCZOS
+                                    )
+                                    st.caption("Cut zone")
+                                    if show_cut_overlay:
+                                        st.image(localized_overlay_preview, use_container_width=False)
+                                    else:
+                                        st.image(localized_30_preview, use_container_width=False)
+
+                                st.markdown(f"[Open listing]({loc['url']})")
+                                st.markdown("---")
                     else:
                         st.markdown(
                             "<div class='section-subtitle'>Localized icon scan: no differences found from default US icon.</div>",
